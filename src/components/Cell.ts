@@ -20,7 +20,7 @@ export class Cell extends Phaser.GameObjects.Image {
 		this.on('pointerdown', this.clickHandler, this);
 	}
 
-	public flipCell() {
+	public flipCell(clicked: boolean = false) {
 		this.off('pointerdown');
 		this.removeInteractive();
 
@@ -32,8 +32,11 @@ export class Cell extends Phaser.GameObjects.Image {
 			this.icon = this.scene.add.image(this.x + this.size / 2, this.y + this.size / 2, 'mine')
 						.setOrigin(0.5)
 						.setDepth(5);
-			this.setTint(BombTileColor);
-			this.scene.events.emit('explode');
+
+			if (clicked) {
+				this.setTint(BombTileColor);
+				this.scene.events.emit('cell:explode');
+			}
 		} else {
 			this.setTint(FlippedTileColor);
 			if (this.neighbourBombs) {
@@ -43,17 +46,19 @@ export class Cell extends Phaser.GameObjects.Image {
 								.setTint(HintColors[this.neighbourBombs])
 								.setDepth(5);
 			} else {
-				this.scene.events.emit('empty', this);
+				this.scene.events.emit('cell:empty', this);
 			}
 		}
 	}
 
 	private clickHandler(pointer: Phaser.Input.Pointer) {
 		if (pointer.buttons === 1) {
-			this.flipCell();
+			this.flipCell(true);
 		} else {
 			this.markCell();
 		}
+
+		this.scene.events.emit('cell:clicked');
 	}
 
 	private markCell() {

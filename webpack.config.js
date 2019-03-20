@@ -17,6 +17,9 @@ module.exports = {
 	entry: {
 		game: ['./src/game.ts']
 	},
+	output: {
+		path: path.resolve(__dirname, './docs')
+	},
 	module: {
 		rules: [{
 			test: /\.tsx?$/,

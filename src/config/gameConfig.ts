@@ -21,15 +21,15 @@ export interface IGameSettings {
 export const settings: IGameSettings = {
 	difficulty: {
 		easy: {
-			bombs: 15,
+			bombs: 25,
 			cellSize: 20,
 		},
 		medium: {
-			bombs: 30,
+			bombs: 50,
 			cellSize: 20,
 		},
 		hard: {
-			bombs: 60,
+			bombs: 100,
 			cellSize: 10,
 		},
 	},

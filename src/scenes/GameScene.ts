@@ -34,19 +34,25 @@ export class GameScene extends BaseScene {
 	// ---------------------------------
 
 	private bindEvents() {
-		this.events.on('explode', () => {
+		this.events.on('cell:explode', () => {
 			this.gameState = 'gameover';
-			this.add.bitmapText(this.scale.gameSize.width / 2, 20, 'arcade', 'game over', 32).setOrigin(0.5);
+			this.add.bitmapText(this.scale.gameSize.width / 2, 20, 'arcade', 'game over', 32).setOrigin(0.5).setDepth(10);
 			this.add.bitmapText(this.scale.gameSize.width / 2, this.scale.gameSize.height - 25, 'arcade', 'menu', 32)
+				.setDepth(10)
 				.setOrigin(0.5)
 				.setInteractive({ cursor: 'pointer' })
 				.on('pointerdown', () => this.scene.start('TitleScene'), this);
 
+			this.cells.filter( (cell: Cell) => cell.hasBomb).forEach( (cell: Cell) => cell.flipCell() );
 			this.cells.forEach( (cell: Cell) => cell.removeInteractive() );
 		}, this);
 
-		this.events.on('empty', (cell: Cell) => {
+		this.events.on('cell:empty', (cell: Cell) => {
 			this.openEmptyAreas(cell);
+		}, this);
+
+		this.events.on('cell:clicked', () => {
+			console.log('count state here');
 		}, this);
 	}
 
@@ -100,30 +106,30 @@ export class GameScene extends BaseScene {
 
 		// above
 		targetIndex = cell.index - this.cellRowWidth - 1;
-		if (targetIndex > -1 && targetIndex < this.cells.length) { results.push(this.cells[targetIndex]); }
+		if (targetIndex > -1 && targetIndex < this.cells.length && targetIndex % this.cellRowWidth < cell.index % this.cellRowWidth) { results.push(this.cells[targetIndex]); }
 
 		targetIndex = cell.index - this.cellRowWidth;
 		if (targetIndex > -1 && targetIndex < this.cells.length) { results.push(this.cells[targetIndex]); }
 
 		targetIndex = cell.index - this.cellRowWidth + 1;
-		if (targetIndex > -1 && targetIndex < this.cells.length) { results.push(this.cells[targetIndex]); }
+		if (targetIndex > -1 && targetIndex < this.cells.length && targetIndex % this.cellRowWidth > cell.index % this.cellRowWidth) { results.push(this.cells[targetIndex]); }
 
 		// same row
 		targetIndex = cell.index - 1;
-		if (targetIndex > -1 && targetIndex < this.cells.length) { results.push(this.cells[targetIndex]); }
+		if (targetIndex > -1 && targetIndex < this.cells.length && targetIndex % this.cellRowWidth < cell.index % this.cellRowWidth) { results.push(this.cells[targetIndex]); }
 
 		targetIndex = cell.index + 1;
-		if (targetIndex > -1 && targetIndex < this.cells.length) { results.push(this.cells[targetIndex]); }
+		if (targetIndex > -1 && targetIndex < this.cells.length && targetIndex % this.cellRowWidth > cell.index % this.cellRowWidth) { results.push(this.cells[targetIndex]); }
 
 		// below
 		targetIndex = cell.index + this.cellRowWidth - 1;
-		if (targetIndex > -1 && targetIndex < this.cells.length) { results.push(this.cells[targetIndex]); }
+		if (targetIndex > -1 && targetIndex < this.cells.length && targetIndex % this.cellRowWidth < cell.index % this.cellRowWidth) { results.push(this.cells[targetIndex]); }
 
 		targetIndex = cell.index + this.cellRowWidth;
 		if (targetIndex > -1 && targetIndex < this.cells.length) { results.push(this.cells[targetIndex]); }
 
 		targetIndex = cell.index + this.cellRowWidth + 1;
-		if (targetIndex > -1 && targetIndex < this.cells.length) { results.push(this.cells[targetIndex]); }
+		if (targetIndex > -1 && targetIndex < this.cells.length && targetIndex % this.cellRowWidth > cell.index % this.cellRowWidth) { results.push(this.cells[targetIndex]); }
 
 		return results;
 	}
