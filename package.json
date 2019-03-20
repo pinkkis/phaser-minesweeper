@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "extrude": "tile-extruder -w 32 -h 32",
-    "build": "webpack --mode production",
-    "start": "node --max_old_space_size=8192 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --mode development --progress --port=8000"
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "start": "cross-env NODE_ENV=development node --max_old_space_size=8192 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --mode development --progress --port=8000"
   },
   "browserslist": "> 1%, not dead",
   "repository": {

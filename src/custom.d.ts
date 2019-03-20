@@ -3,3 +3,9 @@ declare module "worker-loader!*" {
 		constructor();
 	}
 }
+
+declare var require: any;
+
+interface Window {
+	env?: any;
+}

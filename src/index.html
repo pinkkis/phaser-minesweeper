@@ -7,17 +7,21 @@
 			content="width=device-width, initial-scale=1.0, maximum-scale=2.0"
 		/>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<title>Game Template</title>
+		<link rel="shortcut icon" href="favicon.ico" />
+		<title>Minesweeper</title>
 
-		<!-- <script async src="https://www.googletagmanager.com/gtag/js?id="></script> -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136698858-2"></script>
 		<script>
-			// window.dataLayer = window.dataLayer || [];
-			// function gtag() {
-			// 	dataLayer.push(arguments);
-			// }
-			// gtag('js', new Date());
-			// gtag('config', 'UA-######-1', { 'anonymize_ip': true });
+			window.env = {
+				buildType: '<%= htmlWebpackPlugin.options.buildType %>'
+			};
+
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', 'UA-136698858-2', { 'anonymize_ip': true });
 		</script>
 	</head>
 

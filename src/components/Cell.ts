@@ -1,4 +1,4 @@
-import { HintColors, BombTileColor, FlippedTileColor } from "./Colors";
+import { HintColors, BombTileColor, FlippedTileColor } from './Colors';
 
 export class Cell extends Phaser.GameObjects.Image {
 	public index: number;
@@ -26,7 +26,10 @@ export class Cell extends Phaser.GameObjects.Image {
 
 		this.flipped = true;
 
-		if (this.flagged) { this.icon.destroy(); }
+		if (this.flagged) {
+			this.flagged = false;
+			this.icon.destroy();
+		}
 
 		if (this.hasBomb) {
 			this.icon = this.scene.add.image(this.x + this.size / 2, this.y + this.size / 2, 'mine')
