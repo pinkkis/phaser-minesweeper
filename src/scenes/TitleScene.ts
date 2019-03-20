@@ -7,7 +7,6 @@ export class TitleScene extends BaseScene{
 	}
 
 	public create(): void {
-		console.info('TitleScene - create()');
 		this.add.bitmapText(10, 10, 'arcade', 'Mine sweeper', 16);
 
 		this.add.rectangle(10, 50, 80, 40, 0x339933, 1)

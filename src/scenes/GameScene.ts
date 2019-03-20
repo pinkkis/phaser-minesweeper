@@ -14,7 +14,6 @@ export class GameScene extends BaseScene {
 	}
 
 	public create(data: any): void {
-		console.info(`GameScene - create(${JSON.stringify(data)})`);
 		const difficulty = settings.difficulty[data.difficulty];
 
 		this.cellSize = difficulty.cellSize;

@@ -11,12 +11,7 @@ export class BootScene extends BaseScene{
 		this.load.image('mine', './assets/mine.png');
 	}
 
-	public init(): void {
-		// empty
-	}
-
 	public create(): void {
-		console.info('BootScene - create()');
 		this.scene.start('TitleScene', {});
 	}
 }

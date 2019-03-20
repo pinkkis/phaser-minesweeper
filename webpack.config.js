@@ -8,7 +8,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 // Phaser webpack config
 const phaserModule = path.join(__dirname, '/node_modules/phaser/');
-const phaser = path.join(phaserModule, 'dist/phaser.js');
+const phaser = path.join(phaserModule, 'dist/phaser.min.js');
 
 module.exports = {
 	output: {
