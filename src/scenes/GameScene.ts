@@ -1,7 +1,7 @@
 import { BaseScene } from './BaseScene';
 import { Cell } from '../components/Cell';
-import { settings } from '../config/gameConfig';
-import {  BombTileColor, MenuButtonColor, WhiteColor } from '../components/Colors';
+import { gameSettings } from '../config/GameSettings';
+import { BombTileColor, MenuButtonColor, WhiteColor } from '../components/Colors';
 
 export class GameScene extends BaseScene {
 	private renderTexture: Phaser.GameObjects.RenderTexture;
@@ -19,7 +19,7 @@ export class GameScene extends BaseScene {
 	}
 
 	public create(data: any): void {
-		this.difficulty = settings.difficulty[data.difficulty];
+		this.difficulty = gameSettings.difficulty[data.difficulty];
 		this.cells = [];
 
 		this.cellRowWidth = this.scale.gameSize.width / this.difficulty.cellSize;
@@ -52,8 +52,8 @@ export class GameScene extends BaseScene {
 
 	private gameover(hasWon: boolean) {
 		this.add.bitmapText(this.scale.gameSize.width / 2, 20, 'arcade', hasWon ? 'victory' : 'game over', 32)
-				.setOrigin(0.5, 0)
-				.setDepth(10);
+			.setOrigin(0.5, 0)
+			.setDepth(10);
 
 		this.add.bitmapText(this.scale.gameSize.width / 2, this.scale.gameSize.height - 55, 'arcade', 'menu', 32)
 			.setTint(MenuButtonColor)
@@ -62,8 +62,8 @@ export class GameScene extends BaseScene {
 			.setInteractive({ cursor: 'pointer' })
 			.on('pointerdown', () => this.scene.start('TitleScene'), this);
 
-		this.cells.filter( (cell: Cell) => cell.hasBomb).forEach( (cell: Cell) => cell.flipCell() );
-		this.cells.forEach( (cell: Cell) => cell.removeInteractive() );
+		this.cells.filter((cell: Cell) => cell.hasBomb).forEach((cell: Cell) => cell.flipCell());
+		this.cells.forEach((cell: Cell) => cell.removeInteractive());
 
 		this.timer.destroy();
 	}
@@ -79,12 +79,12 @@ export class GameScene extends BaseScene {
 
 	private createUI(bombCount: number): void {
 		this.timeText = this.add.bitmapText(this.scale.gameSize.width / 2, 6, 'arcade', `time:${this.difficulty.time}`, 8)
-								.setOrigin(0)
-								.setDepth(7);
+			.setOrigin(0)
+			.setDepth(7);
 
 		this.bombsText = this.add.bitmapText(6, 6, 'arcade', `bombs:${String(bombCount).padStart(3, '0')}`, 8)
-								.setOrigin(0)
-								.setDepth(7);
+			.setOrigin(0)
+			.setDepth(7);
 
 		this.timer = this.time.addEvent({
 			delay: 1000,
@@ -101,12 +101,12 @@ export class GameScene extends BaseScene {
 	}
 
 	private checkScores(): void {
-		const unopenedCount = this.cells.filter( (cell: Cell) => !cell.flipped ).length;
+		const unopenedCount = this.cells.filter((cell: Cell) => !cell.flipped).length;
 
 		if (unopenedCount === this.difficulty.bombs) {
 			this.events.emit('victory');
 		} else {
-			const flaggedCount = this.cells.filter( (cell: Cell) => cell.flagged ).length;
+			const flaggedCount = this.cells.filter((cell: Cell) => cell.flagged).length;
 			this.updateBombCounter(flaggedCount);
 		}
 	}
@@ -204,7 +204,7 @@ export class GameScene extends BaseScene {
 			const currentCell = openQueue.shift();
 			const neighbours = this.getCellNeighbours(currentCell);
 
-			neighbours.forEach( (c: Cell) => {
+			neighbours.forEach((c: Cell) => {
 				if (!c.flipped && !c.hasBomb) {
 					c.flipCell();
 					if (!c.neighbourBombs) {
