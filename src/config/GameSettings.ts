@@ -9,14 +9,14 @@ export const gameSettings: IGameSettings = {
 			time: 999,
 		},
 		medium: {
-			bombs: 50,
+			bombs: 40,
 			cellSize: 20,
-			time: 180,
+			time: 300,
 		},
 		hard: {
 			bombs: 100,
 			cellSize: 10,
-			time: 180,
+			time: 300,
 		},
 	},
 };
