@@ -1,7 +1,7 @@
 import { BaseScene } from './BaseScene';
 import { Difficulty } from '../components/Difficulty';
 
-export class TitleScene extends BaseScene{
+export class TitleScene extends BaseScene {
 	constructor(key: string, options: any) {
 		super('TitleScene');
 	}
