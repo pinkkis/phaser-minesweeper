@@ -11,6 +11,8 @@ export class GameScene extends BaseScene {
 	private timer: Phaser.Time.TimerEvent;
 	private timeText: Phaser.GameObjects.BitmapText;
 	private bombsText: Phaser.GameObjects.BitmapText;
+	private confirmButton: Phaser.GameObjects.Image;
+	private homeButton: Phaser.GameObjects.Image;
 
 	private difficulty: any;
 
@@ -85,6 +87,31 @@ export class GameScene extends BaseScene {
 		this.bombsText = this.add.bitmapText(6, 6, 'arcade', `bombs:${String(bombCount).padStart(3, '0')}`, 8)
 			.setOrigin(0)
 			.setDepth(7);
+
+		this.confirmButton = this.add.image(90, 6, 'smile')
+								.setOrigin(0)
+								.setInteractive({cursor: 'pointer'});
+
+		this.homeButton = this.add.image(this.scale.gameSize.width - 16, 6, 'home')
+								.setOrigin(0)
+								.setInteractive({cursor: 'pointer'});
+
+		this.confirmButton.on('pointerup', () => {
+			const cellsToOpen = this.cells.filter( (cell: Cell) => !cell.flagged && !cell.flipped );
+
+			if (cellsToOpen.every( (cell: Cell) => !cell.hasBomb)) {
+				cellsToOpen.forEach( (cell: Cell) => cell.flipCell() );
+				this.events.emit('victory');
+			} else {
+				cellsToOpen.filter( (cell: Cell) => cell.hasBomb)
+						   .forEach( (cell: Cell) => cell.flipCell(true) );
+			}
+		}, this);
+
+		this.homeButton.on('pointerup', () => {
+			this.timer.destroy();
+			this.scene.start('TitleScene');
+		}, this);
 
 		this.timer = this.time.addEvent({
 			delay: 1000,

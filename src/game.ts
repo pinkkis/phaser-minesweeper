@@ -1,4 +1,5 @@
 import 'phaser';
+import '@csstools/normalize.css';
 import './css/styles.css';
 import { BootScene } from './scenes/BootScene';
 import { gameConfig } from './config/gameConfig';

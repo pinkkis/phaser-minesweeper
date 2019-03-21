@@ -10,7 +10,8 @@
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136698858-2"></script>
 		<script>
 			window.env = {
-				buildType: '<%= htmlWebpackPlugin.options.buildType %>'
+				buildType: '<%= htmlWebpackPlugin.options.buildType %>',
+				version: '<%= htmlWebpackPlugin.options.version %>',
 			};
 
 			window.dataLayer = window.dataLayer || [];
@@ -25,13 +26,20 @@
 	<body>
 		<div id="game-container"></div>
 
+		<section>
+			<h3>Instruction</h3>
+			<p>Left click to open a cell, Right click to flag a cell. Click the smiley face to open all unmarked cells.
+				Click home to go back to the title screen.</p>
+		</section>
+
 		<hr>
 		<aside>
 			<h3>Cookies</h3>
 			<p>This website uses Google Analytics cookies to collect anonymized usage statistics to help us develop our
 				services further. You can view our <a href="https://poisonvial.com/privacy.html" target="_blank">privacy
 					policy here</a>. Games may additionally store your save data in your browser. This information is
-				not transmitted across the network. Games which do not require logins do not collect any user specific data.</p>
+				not transmitted across the network. Games which do not require logins do not collect any user specific
+				data.</p>
 		</aside>
 	</body>
 

@@ -39,5 +39,8 @@ export class TitleScene extends BaseScene{
 				}
 			}, this);
 		this.add.bitmapText(225, 155, 'arcade', 'fullscreen', 8);
+
+		this.add.bitmapText(8, this.scale.gameSize.height - 16, 'arcade', `version: ${window.env.version || '0.0.0'}` , 8)
+				.setOrigin(0);
 	}
 }
