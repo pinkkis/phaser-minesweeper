@@ -16,7 +16,13 @@
   },
   "keywords": [],
   "author": "Kristian Koivisto-Kokko <pinkkis@gmail.com> (http://pinkkis.com/)",
-  "license": "ISC",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/pinkkis/phaser-minesweeper/blob/master/LICENSE.md"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/pinkkis/phaser-starter/issues"
   },
