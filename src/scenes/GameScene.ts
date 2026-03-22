@@ -4,19 +4,19 @@ import { gameSettings } from '../config/GameSettings';
 import { BombTileColor, MenuButtonColor, WhiteColor } from '../components/Colors';
 
 export class GameScene extends BaseScene {
-	private renderTexture: Phaser.GameObjects.RenderTexture;
-	private cellRowWidth: number;
-	private cells: Cell[];
+	private renderTexture!: Phaser.GameObjects.RenderTexture;
+	private cellRowWidth!: number;
+	private cells!: Cell[];
 
-	private timer: Phaser.Time.TimerEvent;
-	private timeText: Phaser.GameObjects.BitmapText;
-	private bombsText: Phaser.GameObjects.BitmapText;
-	private confirmButton: Phaser.GameObjects.Image;
-	private homeButton: Phaser.GameObjects.Image;
+	private timer!: Phaser.Time.TimerEvent;
+	private timeText!: Phaser.GameObjects.BitmapText;
+	private bombsText!: Phaser.GameObjects.BitmapText;
+	private confirmButton!: Phaser.GameObjects.Image;
+	private homeButton!: Phaser.GameObjects.Image;
 
-	private difficulty: any;
+	private difficulty!: any;
 
-	constructor(key: string, options: any) {
+	constructor() {
 		super('GameScene');
 	}
 
@@ -228,7 +228,7 @@ export class GameScene extends BaseScene {
 		const openQueue: Cell[] = [cell];
 
 		while (openQueue.length > 0) {
-			const currentCell = openQueue.shift();
+			const currentCell = openQueue.shift()!;
 			const neighbours = this.getCellNeighbours(currentCell);
 
 			neighbours.forEach((c: Cell) => {

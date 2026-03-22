@@ -2,7 +2,7 @@ import { BaseScene } from './BaseScene';
 import { Difficulty } from '../components/Difficulty';
 
 export class TitleScene extends BaseScene {
-	constructor(key: string, options: any) {
+	constructor() {
 		super('TitleScene');
 	}
 
@@ -35,12 +35,12 @@ export class TitleScene extends BaseScene {
 					this.scale.stopFullscreen();
 				} else {
 					this.scale.startFullscreen();
-					screen.orientation.lock('landscape-primary');
+					screen.orientation.lock('landscape-primary').catch(() => {});
 				}
 			}, this);
 		this.add.bitmapText(225, 155, 'arcade', 'fullscreen', 8);
 
-		this.add.bitmapText(8, this.scale.gameSize.height - 16, 'arcade', `version: ${window.env.version || '0.0.0'}` , 8)
+		this.add.bitmapText(8, this.scale.gameSize.height - 16, 'arcade', `version: ${__APP_VERSION__}` , 8)
 				.setOrigin(0);
 	}
 }

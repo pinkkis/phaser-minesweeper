@@ -1,9 +1,9 @@
 import { KokoGame } from '../game';
 
 export class BaseScene extends Phaser.Scene {
-	public game: KokoGame;
+	public game!: KokoGame;
 
-	constructor(key: string, options?: any) {
+	constructor(key: string) {
 		super(key);
 	}
 
@@ -11,7 +11,7 @@ export class BaseScene extends Phaser.Scene {
 		// empty
 	}
 
-	public setTimerEvent(timeMin: number, timeMax: number, callback: () => {}, params?: any[]): Phaser.Time.TimerEvent {
+	public setTimerEvent(timeMin: number, timeMax: number, callback: () => void, params?: any[]): Phaser.Time.TimerEvent {
 		return this.time.delayedCall(Phaser.Math.Between(timeMin, timeMax), callback, params || [], this);
 	}
 }

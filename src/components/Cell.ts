@@ -1,21 +1,24 @@
 import { HintColors, BombTileColor, FlippedTileColor } from './Colors';
 
 export class Cell extends Phaser.GameObjects.Image {
-	public index: number;
+	public index!: number;
 	public hasBomb: boolean = false;
 	public flagged: boolean = false;
 	public flipped: boolean = false;
 	public neighbourBombs: number = 0;
-	public icon: Phaser.GameObjects.Image;
-	public number: Phaser.GameObjects.BitmapText;
+	public icon!: Phaser.GameObjects.Image;
+	public number!: Phaser.GameObjects.BitmapText;
 	private size: number;
 
 	constructor(scene: Phaser.Scene, x: number, y: number, size: number, texture: string) {
 		super(scene, x, y, texture);
 		this.size = size;
 		this.setOrigin(0);
-		this.setInteractive({cursor: 'pointer'});
-		this.input.hitArea = new Phaser.Geom.Rectangle(0, 0, size, size);
+		this.setInteractive({
+			cursor: 'pointer',
+			hitArea: new Phaser.Geom.Rectangle(0, 0, size, size),
+			hitAreaCallback: Phaser.Geom.Rectangle.Contains,
+		});
 
 		this.on('pointerdown', this.clickHandler, this);
 	}
